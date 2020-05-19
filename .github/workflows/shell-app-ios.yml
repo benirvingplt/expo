@@ -31,8 +31,8 @@ jobs:
           ruby-version: 2.6.3
       - name: install fastlane
         run: bundle install
-      - name: echo "--run.cwd project/tools-public" >> ~/.yarnrc
-      - name: npm install gulp-cli -g
+      - run: echo "--run.cwd project/tools-public" >> ~/.yarnrc
+      - run: npm install gulp-cli -g
       - name: Build iOS shell app for real devices
         working-directory: tools-public
         timeout-minutes: 30
@@ -46,7 +46,6 @@ jobs:
         id: tarball
         run: echo "::set-output name=filename::ios-shell-builder-sdk-latest-${{ github.sha }}"
       - name: Package release tarball
-        if: github.event.action == "shell-ios-release"
         timeout-minutes: 40
         command: |
           tar \
