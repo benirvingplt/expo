@@ -5,14 +5,11 @@ on:
     types: [ shell-ios-release ]
   schedule:
     - cron: '20 5 * * 2,4,6'
+  # testing
   push:
-    # branches: [ master ]
+    branches: [ "@nick/github-shell-app-ios" ]
     paths:
       - .github/workflows/shell-app-ios.yml
-      - package.json
-      - exponent-view-template
-      - tools-public/**
-      - ios/**
 
 jobs:
   build:
@@ -35,12 +32,12 @@ jobs:
       - run: yarn install --frozen-lockfile
         working-directory: tools-public
       - run: bin/expotools ios-generate-dynamic-macros
-      - uses: actions/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
       - name: bundler cache
         uses: actions/cache@v1
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('Gemfile.lock') }}
+          key: ${{ runner.os }}-gems-${{ hashFiles('.ruby-version') }}-${{ hashFiles('Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
       - name: install fastlane
