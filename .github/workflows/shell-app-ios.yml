@@ -47,7 +47,7 @@ jobs:
         run: echo "::set-output name=filename::ios-shell-builder-sdk-latest-${{ github.sha }}"
       - name: Package release tarball
         timeout-minutes: 40
-        command: |
+        run: |
           tar \
             -zcf "/tmp/${{ steps.tarball.outputs.filename }}" \
             package.json \
