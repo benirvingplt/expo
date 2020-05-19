@@ -8,7 +8,7 @@ on:
   push:
     # branches: [ master ]
     paths:
-      - .github/workflows/shell-app.yml
+      - .github/workflows/shell-app-ios.yml
       - package.json
       - exponent-view-template
       - tools-public/**
